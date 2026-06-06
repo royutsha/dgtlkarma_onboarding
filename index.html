@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DGTLKarma AI Mastermind Onboarding</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #0f0c1b 0%, #201335 50%, #0f0c1b 100%);
+        }
+
+        /* Glassmorphism utility classes */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #a855f7;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+            outline: none;
+        }
+
+        /* Custom scrollbar for premium feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0c1b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a855f7;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen antialiased selection:bg-purple-500 selection:text-white">
+
+    <header class="relative overflow-hidden pt-16 pb-12 text-center px-4">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <div class="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
+            <div class="flex items-center gap-2 mb-6 px-4 py-2 rounded-full glass-card border-purple-500/30">
+                <div class="w-6 h-6 rounded-md bg-gradient-to-tr from-purple-500 to-indigo-500 flex items-center justify-center font-bold text-xs text-white">DK</div>
+                <span class="text-sm font-semibold tracking-wider text-purple-200">DGTL<span class="text-white">Karma</span></span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-purple-400 mb-4">
+                Take the AI-First Pledge
+            </h1>
+            <p class="text-lg md:text-xl text-purple-200/80 max-w-2xl font-medium">
+                Become Top 1% in the AI-First World
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <section class="lg:col-span-7 glass-card rounded-2xl p-6 md:p-8 relative">
+            <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <span class="w-2 h-5 bg-purple-500 rounded-full"></span> Participant Profile
+            </h2>
+            
+            <form id="onboardingForm" class="space-y-6">
+                <div class="flex flex-col sm:flex-row items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
+                    <div class="relative group">
+                        <div class="w-20 h-20 rounded-full overflow-hidden bg-purple-900/40 border-2 border-dashed border-purple-400/40 flex items-center justify-center relative">
+                            <img id="avatarPreview" class="w-full h-full object-cover hidden" alt="Avatar">
+                            <svg id="avatarPlaceholder" class="w-8 h-8 text-purple-300/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        </div>
+                        <input type="file" id="avatarInput" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer">
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <p class="text-sm font-medium text-white">Profile Image</p>
+                        <p class="text-xs text-gray-400 mt-1">Upload a professional square photo (PNG or JPG)</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-purple-300 mb-2">Full Name *</label>
+                        <input type="text" id="fullName" required class="w-full px-4 py-3 rounded-xl glass-input text-sm" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-purple-300 mb-2">Designation *</label>
+                        <input type="text" id="designation" required class="w-full px-4 py-3 rounded-xl glass-input text-sm" placeholder="AI Engineer / Product Lead">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-purple-300 mb-2">Company Name *</label>
+                        <input type="text" id="company" required class="w-full px-4 py-3 rounded-xl glass-input text-sm" placeholder="Acme Corp">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-purple-300 mb-2">LinkedIn URL</label>
+                        <input type="url" id="linkedin" class="w-full px-4 py-3 rounded-xl glass-input text-sm" placeholder="https://linkedin.com/in/username">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-purple-300 mb-2">What are you excited about?</label>
+                    <textarea id="excitedAbout" rows="3" class="w-full px-4 py-3 rounded-xl glass-input text-sm resize-none" placeholder="E.g., Automating enterprise workflows using localized LLM agents..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-purple-300 mb-2">Biggest learnings from today's session</label>
+                    <textarea id="learnings" rows="3" class="w-full px-4 py-3 rounded-xl glass-input text-sm resize-none" placeholder="E.g., Fine-tuning strategies, prompt optimization techniques..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-lg shadow-purple-900/30 active:scale-[0.99] transition-transform cursor-pointer flex items-center justify-center gap-2 tracking-wide">
+                    <span>Generate LinkedIn Post & Certificate</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </button>
+            </form>
+        </section>
+
+        <section id="outputSection" class="lg:col-span-5 space-y-6 opacity-40 pointer-events-none transition-all duration-500">
+            
+            <div class="glass-card rounded-2xl p-6">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-purple-300 mb-4 flex items-center justify-between">
+                    <span>Generated Certificate</span>
+                    <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded">Live Render</span>
+                </h3>
+                
+                <canvas id="certCanvas" class="hidden"></canvas>
+                
+                <div class="w-full bg-black/40 rounded-xl overflow-hidden border border-white/5 relative aspect-[1.414/1]">
+                    <img id="certPreview" class="w-full h-full object-contain" alt="Your Mastermind Certificate">
+                </div>
+
+                <button id="downloadCertBtn" class="mt-4 w-full py-2.5 bg-white/10 hover:bg-white/15 text-white font-semibold text-sm rounded-xl border border-white/10 flex items-center justify-center gap-2 transition-all cursor-pointer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Download Certificate (PNG)
+                </button>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-purple-300 mb-4 flex items-center justify-between">
+                    <span>LinkedIn Draft Copy</span>
+                    <span class="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">Ready</span>
+                </h3>
+                
+                <div class="p-4 bg-black/30 rounded-xl border border-white/5 text-sm text-gray-300 max-h-48 overflow-y-auto whitespace-pre-wrap leading-relaxed" id="linkedinPostPreview"></div>
+
+                <button id="downloadPostBtn" class="mt-4 w-full py-2.5 bg-purple-600/30 hover:bg-purple-600/40 text-purple-200 font-semibold text-sm rounded-xl border border-purple-500/30 flex items-center justify-center gap-2 transition-all cursor-pointer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                    Download Post Copy
+                </button>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('onboardingForm');
+            const avatarInput = document.getElementById('avatarInput');
+            const avatarPreview = document.getElementById('avatarPreview');
+            const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+            const outputSection = document.getElementById('outputSection');
+            const linkedinPostPreview = document.getElementById('linkedinPostPreview');
+            
+            const certCanvas = document.getElementById('certCanvas');
+            const certPreview = document.getElementById('certPreview');
+            
+            const downloadCertBtn = document.getElementById('downloadCertBtn');
+            const downloadPostBtn = document.getElementById('downloadPostBtn');
+
+            let generatedPostText = "";
+            let base64Avatar = "";
+
+            // --- Auto-Load Cached LocalData if Available ---
+            const cache = localStorage.getItem('dgtl_karma_mastermind');
+            if (cache) {
+                const data = JSON.parse(cache);
+                document.getElementById('fullName').value = data.fullName || '';
+                document.getElementById('designation').value = data.designation || '';
+                document.getElementById('company').value = data.company || '';
+                document.getElementById('linkedin').value = data.linkedin || '';
+                document.getElementById('excitedAbout').value = data.excitedAbout || '';
+                document.getElementById('learnings').value = data.learnings || '';
+                if(data.avatar) {
+                    base64Avatar = data.avatar;
+                    avatarPreview.src = data.avatar;
+                    avatarPreview.classList.remove('hidden');
+                    avatarPlaceholder.classList.add('hidden');
+                }
+            }
+
+            // --- Profile Image Upload Processing ---
+            avatarInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        base64Avatar = event.target.result;
+                        avatarPreview.src = base64Avatar;
+                        avatarPreview.classList.remove('hidden');
+                        avatarPlaceholder.classList.add('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // --- Core Business Logic: Form Submission processing ---
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Extract fields
+                const details = {
+                    fullName: document.getElementById('fullName').value.trim(),
+                    designation: document.getElementById('designation').value.trim(),
+                    company: document.getElementById('company').value.trim(),
+                    linkedin: document.getElementById('linkedin').value.trim(),
+                    excitedAbout: document.getElementById('excitedAbout').value.trim(),
+                    learnings: document.getElementById('learnings').value.trim(),
+                    avatar: base64Avatar
+                };
+
+                // Store state locally
+                localStorage.setItem('dgtl_karma_mastermind', JSON.stringify(details));
+
+                // Generate Output Systems
+                generateLinkedInPost(details);
+                renderCertificateCanvas(details);
+
+                // Reveal Output UI Workspace smoothly
+                outputSection.classList.remove('opacity-40', 'pointer-events-none');
+                
+                // Trigger Celeb Confetti Multi-burst sequence
+                triggerCelebrationConfetti();
+                
+                // Native smooth scroll to preview layout area
+                outputSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+
+            // --- LinkedIn Content Compiler engine ---
+            function generateLinkedInPost(data) {
+                const excitedSentence = data.excitedAbout ? `⚡ I am incredibly excited about: "${data.excitedAbout}"\n\n` : '';
+                const learningSentence = data.learnings ? `💡 My absolute biggest takeaway today: "${data.learnings}"\n\n` : '';
+
+                generatedPostText = `🚀 I am thrilled to announce that I have officially taken the AI-First Pledge and joined the elite DGTLKarma AI Mastermind framework!\n\n` +
+                    `In a hyper-evolving global landscape, building an #AIFirst mindset isn't an option—it's the definitive baseline to perform within the top 1%.\n\n` +
+                    `💼 ${data.fullName}\n` +
+                    `📌 ${data.designation} at ${data.company}\n\n` +
+                    excitedSentence +
+                    learningSentence +
+                    `Ready to drive true structural AI transformation within my industry context. Let's build!\n\n` +
+                    `#DGTLKarma #AIFirst #GenerativeAI #FutureOfWork #AITransformation`;
+
+                linkedinPostPreview.innerText = generatedPostText;
+            }
+
+            // --- Premium Certificate Generation (Canvas API) ---
+            function renderCertificateCanvas(data) {
+                const ctx = certCanvas.getContext('2d');
+                
+                // Landscape Standard Aspect Ratio Definition (1414 x 1000)
+                certCanvas.width = 1414;
+                certCanvas.height = 1000;
+
+                // 1. Draw Deep Corporate Purple Rich Gradient Background Background
+                const bgGrad = ctx.createLinearGradient(0, 0, 1414, 1000);
+                bgGrad.addColorStop(0, '#130b24');
+                bgGrad.addColorStop(0.5, '#251545');
+                bgGrad.addColorStop(1, '#0c0717');
+                ctx.fillStyle = bgGrad;
+                ctx.fillRect(0, 0, 1414, 1000);
+
+                // 2. Structural Glassmorphic Internal Frame Geometric Border
+                ctx.strokeStyle = 'rgba(168, 85, 247, 0.25)';
+                ctx.lineWidth = 4;
+                ctx.strokeRect(40, 40, 1334, 920);
+
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(50, 50, 1314, 900);
+
+                // Geometric Accents (Modern UI corners)
+                ctx.fillStyle = '#a855f7';
+                ctx.fillRect(36, 36, 30, 8);
+                ctx.fillRect(36, 36, 8, 30);
+                ctx.fillRect(1348, 36, 30, 8);
+                ctx.fillRect(1370, 36, 8, 30);
+                ctx.fillRect(36, 956, 30, 8);
+                ctx.fillRect(36, 934, 8, 30);
+                ctx.fillRect(1348, 956, 30, 8);
+                ctx.fillRect(1370, 934, 8, 30);
+
+                // 3. Render Top Branding Header Space
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 32px "Plus Jakarta Sans", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('DGTLKarma AI MASTERMIND', 707, 160);
+
+                // Decorative underline under branding
+                const lineGrad = ctx.createLinearGradient(500, 0, 914, 0);
+                lineGrad.addColorStop(0, 'transparent');
+                lineGrad.addColorStop(0.5, 'rgba(168, 85, 247, 0.8)');
+                lineGrad.addColorStop(1, 'transparent');
+                ctx.fillStyle = lineGrad;
+                ctx.fillRect(500, 185, 414, 2);
+
+                // 4. Main Type Typography Hierarchy
+                ctx.fillStyle = '#a855f7';
+                ctx.font = '600 20px "Plus Jakarta Sans", sans-serif';
+                ctx.fillText('CERTIFICATE OF ACCOMPLISHMENT & PLEDGE', 707, 260);
+
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                ctx.font = '400 24px "Plus Jakarta Sans", sans-serif';
+                ctx.fillText('This safely validates that', 707, 340);
+
+                // Recipient Dynamic Name
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 56px "Plus Jakarta Sans", sans-serif';
+                ctx.fillText(data.fullName, 707, 430);
+
+                // Designation Subline text blocks
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                ctx.font = 'italic 24px "Plus Jakarta Sans", sans-serif';
+                ctx.fillText(`${data.designation} at ${data.company}`, 707, 485);
+
+                // Affirmation Text block
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                ctx.font = '400 22px "Plus Jakarta Sans", sans-serif';
+                ctx.fillText('has completed the deep immersion track and taken the official operational oath to become an', 707, 560);
+                
+                ctx.fillStyle = '#e9d5ff';
+                ctx.font = 'bold 36px "Plus Jakarta Sans", sans-serif';
+                ctx.fillText('AI-FIRST MASTERMIND PARTICIPANT', 707, 620);
+
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.font = '400 18px "Plus Jakarta Sans", sans-serif';
+                ctx.fillText('Verifiable Credential Profile Issued via DGTLKarma State Architectures', 707, 670);
+
+                // 5. Lower Badge Footer Area (QR Code Mock Representation + Seal Block)
+                // Simulated Elegant Modular Security QR Graphic
+                const qrX = 657; // centered (1414/2) - 50
+                const qrY = 740;
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(qrX, qrY, 100, 100); // base container white
+                
+                // Render technical structural accent matrix lines inside fake QR
+                ctx.fillStyle = '#0f0c1b';
+                ctx.fillRect(qrX+8, qrY+8, 28, 28);
+                ctx.fillRect(qrX+64, qrY+8, 28, 28);
+                ctx.fillRect(qrX+8, qrY+64, 28, 28);
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(qrX+16, qrY+16, 12, 12);
+                ctx.fillRect(qrX+72, qrY+16, 12, 12);
+                ctx.fillRect(qrX+16, qrY+72, 12, 12);
+                // Random code bits simulation
+                ctx.fillStyle = '#0f0c1b';
+                ctx.fillRect(qrX+42, qrY+12, 10, 20);
+                ctx.fillRect(qrX+12, qrY+42, 30, 10);
+                ctx.fillRect(qrX+50, qrY+50, 25, 15);
+                ctx.fillRect(qrX+42, qrY+75, 15, 15);
+                ctx.fillRect(qrX+70, qrY+70, 18, 18);
+
+                // Finalize and bind Canvas to Web Image View Node
+                certPreview.src = certCanvas.toDataURL('image/png');
+            }
+
+            // --- Micro-Engine Execution Download Routines ---
+            downloadCertBtn.addEventListener('click', () => {
+                const nameSanitized = document.getElementById('fullName').value.replace(/\s+/g, '_') || 'Participant';
+                const link = document.createElement('a');
+                link.download = `DGTLKarma_AI_Certificate_${nameSanitized}.png`;
+                link.href = certCanvas.toDataURL('image/png');
+                link.click();
+            });
+
+            downloadPostBtn.addEventListener('click', () => {
+                const blob = new Blob([generatedPostText], { type: 'text/plain;charset=utf-8;' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'LinkedIn_AI_Pledge_Post.txt';
+                link.click();
+            });
+
+            // --- Confetti Blast Celebration Execution logic ---
+            function triggerCelebrationConfetti() {
+                const duration = 2.5 * 1000;
+                const animationEnd = Date.now() + duration;
+                const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
+
+                function randomInRange(min, max) {
+                    return Math.random() * (max - min) + min;
+                }
+
+                const interval = setInterval(function() {
+                    const timeLeft = animationEnd - Date.now();
+
+                    if (timeLeft <= 0) {
+                        return clearInterval(interval);
+                    }
+
+                    const particleCount = 50 * (timeLeft / duration);
+                    // multi-angle burst sequence
+                    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+                }, 250);
+            }
+        });
+    </script>
+</body>
+</html>
